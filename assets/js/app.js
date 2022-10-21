@@ -1,13 +1,18 @@
-/**
- * In this file app.js you will find all CRUD functions name.
- * 
- */
 
+// READS THE TASKS WHEN VISITING THE PAGE FOR THE FIRST TIME
 readTask();
-function saveTask(){
+
+// ADD TASK TARGETED MODAL
+function showAddTaskModel()
+{
     $(document).ready(function(){
         $("#modal-task").modal("show");
     });
+}
+
+// GETS THE USERS INPUT AND PUSH IT IN THE TASKS ARRAY
+function saveTask(){
+    
     // FORM VALIDATION
     if(document.getElementsByClassName('titleInput')[0].value.trim()!=0)
     { 
@@ -56,6 +61,8 @@ function saveTask(){
     
 }
 
+
+// GETS THE USERS INPUT AND OVERWRITES THE OLD INFOS
 function saveChanges(){
 
    // FORM VALIDATION
@@ -91,8 +98,10 @@ function saveChanges(){
        } 
        
        Temp.deadLine =document.getElementsByClassName('dateInput')[1].value;
-       Temp.creation = Date().slice(0,21);
-       
+
+       const creationDateInTasks = tasks[indexToEdit].creation;
+       Temp.creation =creationDateInTasks;
+
        // ADD TO THE ARRR
     //    tasks[indexToEdit]=Temp;
        tasks.splice(indexToEdit, 1,Temp);
@@ -113,19 +122,43 @@ function saveChanges(){
    readTask();
 }
 
+
+// CLEARS THE INNER HTML
 function clearTask(){
     document.getElementById('doneCard').innerHTML="";
     document.getElementById('inProgessCard').innerHTML="";
     document.getElementById('toDoCard').innerHTML="";
 }
 
+
+// ADDS THE TASKS CONTENT TO OUR HTML
 function readTask()
-{
+{   
+
     let button;
     let shortDescription;
     let toDoCount=0, doneCount=0, inProgessCount=0;
     for(let i =0 ;i<tasks.length;i++)
-    {
+
+    {   
+        let isLast = false;
+        while(!(i in tasks))
+        {   if(i!=tasks.length-1)
+            {
+                i++;    
+            }
+            else
+            { 
+                isLast = true;
+                break
+            }
+        }
+        if(isLast)
+        {
+            break;
+        }
+ 
+
         if(tasks[i].description.length>30)
         {
             shortDescription = tasks[i].description.slice(0,30)+"...";
@@ -135,6 +168,9 @@ function readTask()
             shortDescription = tasks[i].description;
         }
         let icon;
+
+        
+
         if(tasks[i].status=="To-Do")
         {
             icon="bi bi-question-square text-green fs-18px";
@@ -147,7 +183,10 @@ function readTask()
         {
             icon="bi bi-check2-square text-green fs-19px";
         }  
-        button = `<button id="${"myButton"+i}" class="list-group-item-action mx-0 border row align-items-center bg-white pb-4px" onclick="fullViewOfTheTask(this.id)">
+
+        
+        button = `<button id="${"myButton"+i}" class="list-group-item-action mx-0 border row align-items-center  pb-4px lalala" onclick="fullViewOfTheTask(this.id)" draggable="true" ondrag="drag(event)">
+
         <div class="col-1">
         <i class="${icon}"></i> 
         </div>
@@ -185,6 +224,8 @@ function readTask()
     
 }
 
+
+// SaVE => CLEAR => READ
 function CreateTask() {
 
     // SAVE
@@ -200,20 +241,23 @@ function CreateTask() {
 // Global Variable:    
 let indexToEdit;
 
+//SHOW THE EDIT MODEL AND GET THE OLD USERS INPUT FROM THE ARRAY ,ACCEPTS THE ID OF THE BUTTON THAT CONTAINS THE IDEX AT IT FIRST PNE OR TWO CHAR
 function showEditModel(ID) 
-{   
-    let index=ID.slice(0,1);
-    indexToEdit=index;
-    document.getElementsByClassName('titleInput')[1].value=tasks[index].title;
-
-    
-
+{   // DELETE
+    if(ID.length==5){
+        indexToEdit=ID.slice(0,1);
+    }
+    else 
+    {
+        indexToEdit = ID.slice(0,2);
+    }
+    document.getElementsByClassName('titleInput')[1].value=tasks[indexToEdit].title;
     document.getElementById(tasks[indexToEdit].type).checked= true;
-    
-    document.getElementsByClassName('priorityInput')[1].value=tasks[index].priority;
-    document.getElementsByClassName('dateInput')[1].value=tasks[index].deadLine;
-    document.getElementsByClassName('DescriptionInput')[1].value=tasks[index].description;
-    document.getElementsByClassName('statusInput')[0].value=tasks[index].status;
+    document.getElementsByClassName('priorityInput')[1].value=tasks[indexToEdit].priority;
+    document.getElementsByClassName('dateInput')[1].value=tasks[indexToEdit].deadLine;
+    document.getElementsByClassName('DescriptionInput')[1].value=tasks[indexToEdit].description;
+    document.getElementsByClassName('statusInput')[0].value=tasks[indexToEdit].status;
+
     $(document).ready(function(){
         $("#modal-edit").modal("show");
     });
@@ -221,6 +265,8 @@ function showEditModel(ID)
     
 }
 
+
+// SAVECHANGES => CLEAR => READ
 function editTask(ID)
 {   
     // SAVE
@@ -231,21 +277,42 @@ function editTask(ID)
     readTask();
 }
 
+
+//DELETES THE USERS WANTED INDEX/ID ANd KEEPS ITS INdEX EMPTY TO AVOID ID REPETITION, ACCEPTS THE DELETE BUTTON ID THAT CONTAINS THE THE INDEX TO DELETE AT THE FIRST 1 OR 2 CHARS
 function deleteTask(ToDelete) {
+    
     // DELETE
-    indexToDelete = ToDelete.slice(0,1);
-    tasks.splice(indexToDelete,1);
+    if(ToDelete.length==7){
+        indexToDelete = ToDelete.slice(0,1);
+    }
+    else 
+    {
+        indexToDelete = ToDelete.slice(0,2);
+    }
+    // tasks.splice(indexToDelete,1);
+    delete tasks[indexToDelete];
+
     // CLEAR
     clearTask();
     // READ
     readTask();
 }
 
+
+// SHOWS A MODAL THAT SHOES THE INPUT DETAILS AND CONTAINS THE EDIT AND DELETE BUTTONS
 function fullViewOfTheTask(ID) {
     $(document).ready(function(){
         $("#fullView").modal("show");
     });
-    let index=ID.slice(-1);
+
+    let index;
+    if(ID.length==9){
+        index=ID.slice(-1);
+    }
+    else if(ID.length>9){
+        index=ID.slice(-2);
+    }
+
     document.getElementById('creationDateSpan').innerText=tasks[index].creation;
     document.getElementById('deadlineSpan').innerText=tasks[index].deadLine;
     document.getElementById('prioritySpan').innerText=tasks[index].priority;
@@ -257,3 +324,42 @@ function fullViewOfTheTask(ID) {
     btn.setAttribute('id',index+"Delete");
     document.querySelector('[name="editTaskBtn"]').setAttribute('id',index+"Edit");
 };
+
+// ALLOWS THE DROP INTO IT ELEMENT CALLED IN
+function allowDrop(e){
+    e.preventDefault();
+}
+
+// Global Variable: 
+let indexToMove;
+// GETS THE ID OF THE DRAGED ELEMENT
+function drag(e)
+{
+    e.preventDefault();         
+    indexToMove= e.target.id.slice(8);
+}
+
+// THIS Fct GETS TRIG IF THE ELEMENT CALLED IN WAS THE DROP TARGET
+function dropedInProgress(e)
+{
+    tasks[indexToMove].status = "In-Progress";
+    clearTask();
+    readTask();
+}
+
+// THIS Fct GETS TRIG IF THE ELEMENT CALLED IN WAS THE DROP TARGET
+function dropedToDo(e)
+{
+    tasks[indexToMove].status = "To-Do";
+    clearTask();
+    readTask();
+}
+
+// THIS Fct GETS TRIG IF THE ELEMENT CALLED IN WAS THE DROP TARGET
+function dropedDone(e)
+{
+    tasks[indexToMove].status = "Done";
+    clearTask();
+    readTask();
+}
+

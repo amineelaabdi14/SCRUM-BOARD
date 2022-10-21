@@ -43,7 +43,9 @@
 				
 				<div class="">
 					
-					<button class="btn btn-lg btn-info shadow-sm text-white fs-15px" type="button" onclick="saveTask()">
+
+					<button class="btn btn-lg btn-info shadow-sm text-white fs-15px" type="button" onclick="showAddTaskModel()">
+
 						<i class="bi bi-plus-lg text-white"></i> Add Task</button>
 					
 					
@@ -52,31 +54,37 @@
 			 
 			<div id="cardsHolder"class=" d-flex flex-lg-row flex-xlg-wrap justify-content-xl-around overflow-auto  rounded " style=" margin: auto;margin-top: 4vw;">
 				     
-				<div  class="myCard m-2 shadow-sm" style="width:50vw;border-radius:7px;">
+
+				<div  class="myCard m-2 shadow-sm" style="width:50vw;border-radius:7px;"ondragover="allowDrop(event)" ondrop="dropedToDo(event)">
 					<div class=" h-35px align "style="padding-left:20px;background-color: #2d353c;border-top-left-radius:7px;border-top-right-radius:7px;">
 						<h4 class="fs-16px text-white fw-normal text-left shadow pt-8px " >To Do (<span id="to-do-tasks-count">6</span>)</h4>
 					</div>
-					<div id="toDoCard" class="tasksCard overflow-auto list-group "style="box-sizing: border-box;max-height:470px;border-bottom-left-radius:17px;border-bottom-right-radius:17px;" id="to-do-tasks">
+					<div id="toDoCard" class="tasksCard overflow-auto list-group "style="box-sizing: border-box;max-height:460px;border-bottom-left-radius:17px;border-bottom-right-radius:17px;" id="to-do-tasks" >
+
 						<!-- TO DO TASKS GOES HERE -->
 						
 					</div>
 				</div>
 
-				<div  class="myCard m-2 shadow-sm "style="width:50vw;border-radius:7px;">
+
+				<div  class="myCard m-2 shadow-sm "style="width:50vw;border-radius:7px;"ondragover="allowDrop(event)" ondrop="dropedInProgress(event)">
 					<div class=" h-35px align "style="padding-left:20px;background-color: #2d353c;border-top-left-radius:7px;border-top-right-radius:7px;">
-						<h4 class="fs-17px text-white fw-normal text-left shadow pt-8px " >In Progess (<span id="in-progress-tasks-count">4</span>)</h4>
+						<h4 class="fs-17px text-white fw-normal text-left shadow pt-8px " >In Progress (<span id="in-progress-tasks-count">4</span>)</h4>
 					</div>
-					<div id="inProgessCard" class="tasksCard overflow-auto list-group"style="box-sizing: border-box;max-height:510px;border-bottom-left-radius:17px;border-bottom-right-radius:17px;" id="in-progress-tasks">
+					<div id="inProgessCard" class="tasksCard overflow-auto list-group"style="box-sizing: border-box;max-height:460px;border-bottom-left-radius:17px;border-bottom-right-radius:17px;" id="in-progress-tasks">
+
 						<!-- IN PROGRESS TASKS GOES HERE -->
 						
 					</div>
 				</div>
 				
-				<div  class="myCard m-2 shadow-sm "style="width:50vw;border-radius:7px;">
+
+				<div  class="myCard m-2 shadow-sm "style="width:50vw;border-radius:7px;"ondragover="allowDrop(event)" ondrop="dropedDone(event)" ondragover="dragedOver(event)">
 					<div class=" h-35px align "style="padding-left:20px;background-color: #2d353c;border-top-left-radius:7px;border-top-right-radius:7px;">
 						<h4 class="fs-17px text-white fw-normal text-left shadow pt-8px " >Done (<span id="done-tasks-count">3</span>)</h4>
 					</div>
-					<div id="doneCard" class="tasksCard overflow-auto list-group"style="box-sizing: border-box;max-height:510px;border-bottom-left-radius:17px;border-bottom-right-radius:17px;" id="done-tasks">
+					<div id="doneCard" class="tasksCard overflow-auto list-group"style="box-sizing: border-box;max-height:460px;border-bottom-left-radius:17px;border-bottom-right-radius:17px;" id="done-tasks">
+
 						<!-- DONE TASKS GOES HERE -->
 						
 					</div>
@@ -148,7 +156,9 @@
 	</div>
 
 	<!-- BUTTON MODAL -->
-	<div class="modal fade" id="fullView" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+	<div class="modal fade " id="fullView" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content" style="min-width:345px;">
 
