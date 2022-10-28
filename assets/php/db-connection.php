@@ -8,8 +8,8 @@ $databasename = "youcodescrumboard";
 $conn = mysqli_connect($servername, $username, $password, $databasename);
 
 // Check connection
-// if (!$conn) {
-//   die("Connection failed: " . mysqli_connect_error());
-// }
-// echo "Connected successfully";
+if (!$conn) {
+  die("Connection failed: " . mysqli_connect_error());
+}
+
 ?>
