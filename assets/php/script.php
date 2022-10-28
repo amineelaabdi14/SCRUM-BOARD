@@ -85,7 +85,7 @@ function getTasks($divStatus)
     }
 }
 
-
+// THIS FCT GETS THE USER'S INPUT AND INSERTS IT INTO THE DATABASE TABLE'S
 function saveTask(){
     //CODE HERE
     include('db-connection.php'); 
@@ -101,10 +101,11 @@ function saveTask(){
     if (!mysqli_query($conn, $sql)) {
         echo "Error: ";
       }
-    $_SESSION['message'] = "Task has been added successfully !";
+    // $_SESSION['message'] = "Task has been added successfully !";
     header('location: /SCRUM-BOARD-YouCode/index.php');
 }
 
+// THIS FCT GETS THE USER'SCHANGES AND INSERTS IT INTO THE DATABASE TABLE'S WHERE THE IDs ARE ==
 function updateTask(){
     //CODE HERE
     include('db-connection.php'); 
@@ -120,15 +121,14 @@ function updateTask(){
     mysqli_query($conn, $sql);
     
     if (!mysqli_query($conn, $sql)) {
-        echo "Error: ";
+        die ("Error:");
       }
-      else{
-        echo"here";
-      }
-    $_SESSION['message'] = "Task has been updated successfully !";
+    
+    // $_SESSION['message'] = "Task has been updated successfully !";
     header('location: /SCRUM-BOARD-YouCode/index.php');
 }
 
+//THINS FCT DELETES THE WANTED ROW WHERE THE IDs ARE ==
 function deleteTask(){
     //CODE HERE
     $test=$_POST['indexToDelete'];
@@ -138,8 +138,7 @@ function deleteTask(){
     if (!mysqli_query($conn, $sql)) {
         die ("Error:");
       } 
-    $_SESSION['message'] = "Task has been deleted successfully !";
+    // $_SESSION['message'] = "Task has been deleted successfully !";
     header('location: /SCRUM-BOARD-YouCode/index.php');
 }
 
-?>

@@ -45,7 +45,6 @@
 				
 				<div class="">
 					
-
 					<button class="btn btn-lg btn-info shadow-sm text-white fs-15px" type="button" onclick="showAddTaskModel()">
 
 						<i class="bi bi-plus-lg text-white"></i> Add Task</button>
@@ -53,14 +52,14 @@
 				</div>
 			</div>
 			 
-			<div id="cardsHolder"class=" d-flex flex-lg-row flex-xlg-wrap justify-content-xl-around overflow-auto rounded " style=" margin: auto;margin-top: 4vw;">
+			<div id="cardsHolder" class=" d-flex flex-lg-row flex-xlg-wrap justify-content-xl-around overflow-auto rounded"  style=" margin: auto;margin-top: 4vw;">
 				     
 
 				<div  class="myCard m-2 shadow-sm" style="width:50vw;border-radius:7px;">
-					<div class=" h-35px align "style="padding-left:20px;background-color: #2d353c;border-top-left-radius:7px;border-top-right-radius:7px;">
+					<div class=" h-35px align " style="padding-left:20px;background-color: #2d353c;border-top-left-radius:7px;border-top-right-radius:7px;">
 						<h4 class="fs-16px text-white fw-normal text-left shadow pt-8px " >To Do (<span id="to-do-tasks-count"></span>)</h4>
 					</div>
-					<div id="toDoCard" class="tasksCard overflow-auto list-group "style="box-sizing: border-box;max-height:460px;border-bottom-left-radius:17px;border-bottom-right-radius:17px;" id="to-do-tasks" >
+					<div class="tasksCard overflow-auto list-group " style="box-sizing: border-box;max-height:460px;border-bottom-left-radius:17px;border-bottom-right-radius:17px;">
 						<!-- TO DO TASKS GOES HERE -->
 						<?php	
 							getTasks("To Do");	
@@ -69,11 +68,11 @@
 				</div>
 
 
-				<div  class="myCard m-2 shadow-sm "style="width:50vw;border-radius:7px;">
-					<div class=" h-35px align "style="padding-left:20px;background-color: #2d353c;border-top-left-radius:7px;border-top-right-radius:7px;">
+				<div  class="myCard m-2 shadow-sm " style="width:50vw;border-radius:7px;">
+					<div class="h-35px align" style="padding-left:20px;background-color: #2d353c;border-top-left-radius:7px;border-top-right-radius:7px;">
 						<h4 class="fs-17px text-white fw-normal text-left shadow pt-8px " >In Progress (<span id="in-progress-tasks-count"></span>)</h4>
 					</div>
-					<div id="inProgessCard" class="tasksCard overflow-auto list-group"style="box-sizing: border-box;max-height:460px;border-bottom-left-radius:17px;border-bottom-right-radius:17px;" id="in-progress-tasks">
+					<div class="tasksCard overflow-auto list-group" style="box-sizing: border-box;max-height:460px;border-bottom-left-radius:17px;border-bottom-right-radius:17px;">
 
 						<!-- IN PROGRESS TASKS GOES HERE -->
 						<?php	
@@ -83,11 +82,11 @@
 				</div>
 				
 
-				<div  class="myCard m-2 shadow-sm "style="width:50vw;border-radius:7px;">
-					<div class=" h-35px align "style="padding-left:20px;background-color: #2d353c;border-top-left-radius:7px;border-top-right-radius:7px;">
+				<div  class="myCard m-2 shadow-sm " style="width:50vw;border-radius:7px;">
+					<div class=" h-35px align " style="padding-left:20px;background-color: #2d353c;border-top-left-radius:7px;border-top-right-radius:7px;">
 						<h4 class="fs-17px text-white fw-normal text-left shadow pt-8px " >Done (<span id="done-tasks-count"></span>)</h4>
 					</div>
-					<div id="doneCard" class="tasksCard overflow-auto list-group"style="box-sizing: border-box;max-height:460px;border-bottom-left-radius:17px;border-bottom-right-radius:17px;" id="done-tasks">
+					<div class="tasksCard overflow-auto list-group" style="box-sizing: border-box;max-height:460px;border-bottom-left-radius:17px;border-bottom-right-radius:17px;">
 
 						<!-- DONE TASKS GOES HERE -->
 						<?php	
@@ -96,14 +95,9 @@
 					</div>
 				</div>
 			</div>
-		</div>
+			
 		</div>
 		<!-- END #content -->
-		
-		
-		<!-- BEGIN scroll-top-btn -->
-		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top" data-toggle="scroll-to-top"><i class="fa fa-angle-up"></i></a>
-		<!-- END scroll-top-btn -->
 	</div>
 	<!-- END #app -->
 	
@@ -118,8 +112,8 @@
 				<!--begin form-->
 				<form  class="form" action="./assets/php/script.php" method="POST">
 					<div class="form-group">
-						<label  for="title" class="text-dark fw-bold fs-5" >Title<span class="text-danger">*</span></label>
-						<input type="text" class="inputChecker form-control form-control-lg titleInput" name="title-create" maxlength="37" required>
+						<label  for="title-add" class="text-dark fw-bold fs-5" >Title<span class="text-danger">*</span></label>
+						<input id="title-add" type="text" class="inputChecker form-control form-control-lg titleInput" name="title-create" maxlength="37" required>
 					</div>
 
 					<label  class="mt-3 text-dark fw-bold fs-5">Type</label> <br>
@@ -127,7 +121,7 @@
 						<input id="feature-create" type="radio" name="type-create" value="1" class="fs-5 featureInput" checked>
 						<label for="feature-create" class="fs-6 text-secondary" >Feature&emsp;</label> 
 						<input id="bug-create" type="radio" name="type-create" value="2" class="fs-5 bugInput"	>
-						<label for="bug-create"class="fs-6 text-secondary">Bug</label>
+						<label for="bug-create" class="fs-6 text-secondary">Bug</label>
 					</div>
 					<div class="mt-3 form-group">
 						<label for="priority-create" class="text-dark fw-bold fs-5">Priority</label>
@@ -175,7 +169,7 @@
 				<div class="modal-body pb-0">
 					<div class="row">
 						<h4 class="text-dark col-4 fs-16px  " style="padding-right: 0px;">Created on&#160;&#160;:</h4>
-						<span id="creationDateSpan"class="text-muted fs-15px col-8"></span>
+						<span id="creationDateSpan" class="text-muted fs-15px col-8"></span>
 					</div>                             
 					
 					<div class="row mt-15px">
@@ -196,7 +190,7 @@
 					</div>
 					<div class="mt-15px">		
 						<h4 class="text-dark fs-16px ">Description&#160;:</h4>
-						<span id="descriptionSpan"class="text-muted fs-15px" ></span>
+						<span id="descriptionSpan" class="text-muted fs-15px" ></span>
 					</div>
 					<div class="modal-footer mt-20px" style="padding-right: 0px;">
 						<form action="./assets/php/script.php" method="POST">
@@ -230,7 +224,7 @@
 						<input id="Feature-edit" type="radio" name="type-edit" value="1" class="fs-5 featureInput" >
 						<label  for="Feature-edit" class="fs-6 text-secondary" >Feature&emsp;</label> 
 						<input id="Bug-edit" type="radio" name="type-edit" value="2" class="fs-5 bugInput">
-						<label for="Bug-edit"class="fs-6 text-secondary">Bug</label>
+						<label for="Bug-edit" class="fs-6 text-secondary">Bug</label>
 					</div>
 					<div class="mt-3 form-group">
 						<label for="priority-edit" class="text-dark fw-bold fs-5">Priority</label>
@@ -256,12 +250,12 @@
 					
 					<div class="mt-3 form-group">
 						<label  for="Description-edit" class="text-dark fw-bold fs-5">Description</label><br>
-						<textarea id="Description-edit" name="Description-edit"rows="4" class="form-control form-control-lg DescriptionInput" ></textarea>
+						<textarea id="Description-edit" name="Description-edit" rows="4" class="form-control form-control-lg DescriptionInput" ></textarea>
 					</div>  
 					<input name="indexToUpdate" type="text" style="display:none;" value="">
 					<div class="modal-footer">
 					<button id="close" type="button" class="btn btn-danger" data-bs-dismiss="modal">Discard</button>
-					<button id="update" name="update"type="submit" class="btn  text-white" style="background-color: #0060cc;">Save changes
+					<button id="update" name="update" type="submit" class="btn  text-white" style="background-color: #0060cc;">Save changes
 					</button>
 				</div>
 				</form>

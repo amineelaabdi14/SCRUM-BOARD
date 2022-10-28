@@ -18,8 +18,8 @@ function showAddTaskModel()
 }
 
 
-let indexOpened
-// SHOWS A MODAL THAT SHOES THE INPUT DETAILS AND CONTAINS THE EDIT AND DELETE BUTTONS
+let indexOpened // GLOBAL VARIABLE
+// SHOWS A MODAL THAT SHOWES THE INPUT DETAILS AND CONTAINS THE EDIT AND DELETE BUTTONS
 function fullViewOfTheTask(x) {
     indexOpened=x;
     let title=document.getElementById("title"+x.slice(6)).getAttribute("data-title");
@@ -57,7 +57,7 @@ function fullViewOfTheTask(x) {
     document.getElementById('statusSpan').innerText=status;
     if(status=="To Do")
     {
-        status=1;
+        status=1; 
     }
     else if(status=="In Progress")
     {
@@ -82,7 +82,7 @@ function fullViewOfTheTask(x) {
         $("#fullView").modal("show");
     });
 }
-//SHOW THE EDIT MODEL AND GET THE OLD USERS INPUT FROM THE ARRAY ,ACCEPTS THE ID OF THE BUTTON THAT CONTAINS THE IDEX AT IT FIRST PNE OR TWO CHAR
+//SHOWS THE EDIT MODEL AND GETS THE OLD USERS INPUT FROM THE HTML ELEMENT
 function showEditModel() 
 {   
     $(document).ready(function(){
