@@ -2,9 +2,6 @@
 //INCLUDE DATABASE FILE
 include('db-connection.php');
 
-//SESSSION IS A WAY TO STORE DATA TO BE USED ACROSS MULTIPLE PAGES
-session_start();
-
 //ROUTING
 if(isset($_POST['save-create']))        saveTask();
 if(isset($_POST['update']))      updateTask();
@@ -16,9 +13,9 @@ function getTasks($divStatus)
 
     //EVERY INDEX CONATAINS AN ASSO ARRAY/ROW IN THE DATABASE
     $MyData=array();
+    global $conn;
 
     //FETCHING DATABASE INTO A MULTIDIM ARRAY =>
-    include('db-connection.php'); // alias ==> 
     $MyDB=" SELECT tasks.id ,tasks.title, types.name as type_name , priorities.name as priority_name , statuses.name as status_name ,tasks.task_datetime, tasks.description, tasks.task_creation from tasks 
     INNER JOIN types on types.id=tasks.type_id
     INNER JOIN priorities on priorities.id = tasks.priority_id
@@ -88,7 +85,7 @@ function getTasks($divStatus)
 // THIS FCT GETS THE USER'S INPUT AND INSERTS IT INTO THE DATABASE TABLE'S
 function saveTask(){
     //CODE HERE
-    include('db-connection.php'); 
+    global $conn;
     $title=$_POST['title-create'];
     $type=$_POST['type-create']; 
     $priority=$_POST['priority-create'];
@@ -101,14 +98,14 @@ function saveTask(){
     if (!mysqli_query($conn, $sql)) {
         echo "Error: ";
       }
-    // $_SESSION['message'] = "Task has been added successfully !";
+    
     header('location: /SCRUM-BOARD-YouCode/index.php');
 }
 
-// THIS FCT GETS THE USER'SCHANGES AND INSERTS IT INTO THE DATABASE TABLE'S WHERE THE IDs ARE ==
+// THIS FCT GETS THE USER'S CHANGES AND INSERTS IT INTO THE DATABASE TABLE'S WHERE THE IDs ARE ==
 function updateTask(){
+    global $conn;
     //CODE HERE
-    include('db-connection.php'); 
     $title=$_POST['title-edit'];
     $type=$_POST['type-edit']; 
     $priority=$_POST['priority-edit'];
@@ -122,9 +119,8 @@ function updateTask(){
     
     if (!mysqli_query($conn, $sql)) {
         die ("Error:");
-      }
+    }
     
-    // $_SESSION['message'] = "Task has been updated successfully !";
     header('location: /SCRUM-BOARD-YouCode/index.php');
 }
 
@@ -136,9 +132,8 @@ function deleteTask(){
     //SQL DELETE
     $sql="DELETE from tasks where id=$test";
     if (!mysqli_query($conn, $sql)) {
-        die ("Error:");
-      } 
-    // $_SESSION['message'] = "Task has been deleted successfully !";
+        die ("Error:"); 
+      }
     header('location: /SCRUM-BOARD-YouCode/index.php');
 }
 

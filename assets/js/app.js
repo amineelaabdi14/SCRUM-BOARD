@@ -72,7 +72,7 @@ function fullViewOfTheTask(x) {
     let description=document.getElementById("description"+x.slice(6)).getAttribute("data-description");
     document.getElementById('descriptionSpan').innerText=description;
     document.getElementById("Description-edit").value=description; 
-
+    //
     let btn=document.querySelector('[name="indexToDelete"]');
     btn.setAttribute('value',indexOpened.slice(6));
     
